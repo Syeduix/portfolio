@@ -124,3 +124,32 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // Avoid flash of unstyled content
   gsap.set("[text-split]", { opacity: 1 });
 });
+
+const swiperPlayer = new Swiper(".swiper.is-player", {
+  effect: "fade",
+  fadeEffect: {
+    crossFade: true,
+  },
+  followFinger: false,
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  initialSlide: 2,
+});
+
+const swiperCard = new Swiper(".swiper.is-card", {
+  effect: "cards",
+  grabCursor: true,
+  cardsEffect: {
+    slideShadows: false,
+  },
+  initialSlide: 2,
+});
+
+swiperPlayer.controller.control = swiperCard;
+swiperCard.controller.control = swiperPlayer;
