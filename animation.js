@@ -159,3 +159,31 @@ import { Application } from "@splinetool/runtime";
 const canvas = document.getElementById("canvas3d");
 const app = new Application(canvas);
 app.load("https://prod.spline.design/545aZVLbC-ogHpeP/scene.splinecode");
+
+
+<!---slide in animaiton--->
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.coll-item');
+    let options = {
+      rootMargin: '0px 0px -10%', // Adjust this value to trigger the animation earlier
+      threshold: 0.1 // This can also be adjusted based on how early you want the animation to start
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add a delay based on the index to stagger the animations
+          setTimeout(() => {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 200); // Staggered delay
+        }
+      });
+    }, options);
+
+    items.forEach((item, index) => {
+      observer.observe(item);
+    });
+  });
